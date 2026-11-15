@@ -1,0 +1,12 @@
+# KiCad backups, locks and caches
+*-backups/
+*.kicad_prl
+*.bak
+*.lck
+~*.lck
+_autosave-*
+fp-info-cache
+.history/
+# Fabrication output
+gerbers/
+*.zip

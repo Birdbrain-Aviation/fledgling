@@ -1,0 +1,8 @@
+(version 1)
+
+# The PYRO_BUS continuity-sense divider taps R10 inside the 0603 resistor lattice.
+# The firing path keeps the Pyro netclass 0.3 mm everywhere outside this small area.
+# 0.15 mm is still well above IPC-2221 (0.1 mm for 0-15 V, external uncoated) at 8.4 V.
+(rule "Pyro sense-divider tap"
+	(constraint clearance (min 0.15mm))
+	(condition "A.NetClass == 'Pyro' && A.insideArea('PyroTap')"))
