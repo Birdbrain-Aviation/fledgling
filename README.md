@@ -1,5 +1,7 @@
 # Fledgling
 
+![Fledgling PCB layout in KiCad](docs/images/pcb-layout-kicad.png)
+
 > **Status: work in progress (WIP).** The schematic is drawn and the board is partly laid out, but the design is **unfinished, unrouted in places, not DRC-clean, not fabricated and not tested.** Nothing here has flown. I'm publishing it as it stands.
 
 Fledgling is a small single-MCU flight computer for my model and high-power rockets. It's meant to be a simpler sibling of my CORVID flight computer: the same RP2350 family, IMU and power parts, so firmware and drivers carry over. It is designed to work with the [Aviary](https://github.com/Birdbrain-Aviation/aviary) software suite (Owl ground station, Heron log analysis, Mockingbird hardware-in-the-loop testing).
@@ -22,7 +24,7 @@ Safety approach (as designed, unproven): pyro outputs are held off by gate pull-
 
 | | |
 |---|---|
-| Board | 90 x 50 mm, 4 copper layers, KiCad 10 |
+| Board | 90 x 40 mm, 4 copper layers (signal / GND / +3V3 / signal), KiCad 10 |
 | MCU | RP2350A, W25Q128JVSIQ 16 MB QSPI flash |
 | Sensors | MS5611 barometer, LSM6DSO32 IMU, NAU7802 load-cell ADC |
 | Radio | E220-900T22D LoRa module (915 MHz) on an 8-pin JST-GH cable |
@@ -38,7 +40,7 @@ The schematic has a top-level sheet (`Fledgling.kicad_sch`) and four sub-sheets:
 hardware/   KiCad 10 project: schematic sheets, PCB, design rules
   libs/     custom footprint library (Fledgling.pretty)
 bom/        parts list exported from my Google Sheet
-docs/       DRC report from 2026-11-14
+docs/       DRC report, layout log, screenshots
 ```
 
 Open `hardware/Fledgling.kicad_pro` in KiCad 10.
@@ -47,7 +49,8 @@ Symbols and footprints are embedded in the schematic and board files, so the des
 
 ## Known state (WIP)
 
-- Last DRC run (2026-11-14, `docs/DRC-2026-11-14.rpt`): **68 violations and 26 unconnected items**, mostly unrouted nets, dangling vias and silkscreen overlaps. The board was edited after that run, so the current numbers will differ.
+- Last saved DRC run (2026-11-14, `docs/DRC-2026-11-14.rpt`): **1 error and 67 warnings**, plus unconnected plane-net pads (GND, +3V3, VBUS) that still need vias or a local pour. The error is a thermal-relief spoke count on a Do-Not-Populate connector. The warnings are mostly silkscreen overlaps and dangling vias. The board was edited after that run, so current numbers will differ.
+- Silkscreen, a 3D check of the XT30 and USB-C mating directions, and Gerber export have not been done. See `docs/layout-log-2026-11-14.md` for the full layout log.
 - The BOM is a draft. Some prices are optimistic LCSC "from" prices, some parts are marked pending (pyro fuse rating, load cell capacity), and a few parts have low stock. See the Status and Notes columns in `bom/Fledgling_BOM.csv`.
 - Layout is incomplete and messy.
 - The design has changed since my first sketches (it started as a 30 x 80 mm 2-layer board), so the early notes don't all match the current board.
