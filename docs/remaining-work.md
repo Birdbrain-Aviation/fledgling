@@ -14,13 +14,15 @@ Status of the Fledgling board as of the saved files. Sources: the 2026-11-14 DRC
 - [ ] **Re-run DRC** after the edits above (the saved report is older than the last board edit).
 - [ ] **Gerber and drill export**, then a fab quote.
 
-## Design decisions still open (from the operations sheet)
+## Design decisions
 
-- Pyro fuse rating, which depends on measuring igniter current
-- AP63301 feed-forward capacitor value
-- E220 supply voltage
-- Telemetry packet layout shared with Owl
-- Review of buck converter loops, USB and QSPI routing, which DRC does not judge
+Settled on 2026-11-16 and written up in [`design-decisions.md`](design-decisions.md). The schematic and board changes are still to do.
+
+- [x] Pyro fuse: keep 5 A (bench-measure igniter current before ordering)
+- [ ] Feed-forward capacitors: set C35 to 560 pF and C36 to 330 pF in the schematic, add to the BOM, verify on the bench
+- [ ] E220 supply: rewire J2 pin 6 from +5V to +3V3 (schematic and board), update the BOM note
+- [x] Telemetry packet format: deferred, no PCB impact
+- [ ] Review of buck converter loops, USB and QSPI routing, which DRC does not judge
 
 ## Verification not done
 
