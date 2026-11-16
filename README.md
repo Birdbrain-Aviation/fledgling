@@ -6,6 +6,14 @@
 
 Fledgling is a small single-MCU flight computer for my model and high-power rockets. It's meant to be a simpler sibling of my CORVID flight computer: the same RP2350 family, IMU and power parts, so firmware and drivers carry over. It is designed to work with the [Aviary](https://github.com/Birdbrain-Aviation/aviary) software suite (Owl ground station, Heron log analysis, Mockingbird hardware-in-the-loop testing).
 
+## Board views
+
+These are rendered from the board file by `tools/render_board.py` (copper, pads and vias only; the inner planes are not drawn), so they are not KiCad screenshots.
+
+![Top copper](docs/images/render-top.png)
+![Bottom copper](docs/images/render-bottom.png)
+![Both layers](docs/images/render-overview.png)
+
 ## Design intent
 
 These are the goals from my design notes, not verified results.
@@ -40,7 +48,8 @@ The schematic has a top-level sheet (`Fledgling.kicad_sch`) and four sub-sheets:
 hardware/   KiCad 10 project: schematic sheets, PCB, design rules
   libs/     custom footprint library (Fledgling.pretty)
 bom/        parts list exported from my Google Sheet
-docs/       DRC report, layout log, screenshots
+docs/       DRC report, layout log, remaining-work list, images
+tools/      script that renders the board views from the .kicad_pcb
 ```
 
 Open `hardware/Fledgling.kicad_pro` in KiCad 10.
