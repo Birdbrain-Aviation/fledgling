@@ -51,3 +51,7 @@ Transmit current is about 110 mA at 5 V, so it will be somewhat higher at 3.3 V.
 ## 4. Telemetry packet format: deferred
 
 No effect on the PCB. Decide when firmware work starts.
+
+## BOM status
+
+The Google Sheet "Fledgling BOM" and `bom/Fledgling_BOM.csv` now carry the decisions above: C35 (560 pF) and C36 (330 pF, shares the C41 part) as DNP feed-forward capacitors, J2 pin 6 noted as 3.3 V, and F1 recorded as 5 A pending a bench measurement. The schematic and PCB have not been changed yet.
