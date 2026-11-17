@@ -36,7 +36,7 @@ Scaling the Diodes AP63301 evaluation-board values (100 pF with 182 kohm at 3.3 
 
 This is a scaled estimate, not a value printed in the datasheet. The crossover frequency in the datasheet equation isn't stated. The same 0603 pad should take these values, but confirm the footprint size in KiCad. Plan to fit them and check load-step response on the bench, and leave them DNP if the output is stable without them.
 
-**Still to do:** change C35 and C36 values in the schematic, and add both to the BOM.
+**Done 2026-11-17:** C35 is now 560 pF DNP (LCSC C55393) and C36 330 pF DNP (LCSC C1664) in the schematic and BOM. Both values are scaled estimates to tune on the bench.
 
 ## 3. E220 supply: move to 3.3 V
 
@@ -45,8 +45,9 @@ The E220-900T22D is listed with a 2.3-5.5 V supply range, so 3.3 V is within spe
 Transmit current is about 110 mA at 5 V, so it will be somewhat higher at 3.3 V. That is well within the 3 A AP63301 on the 3.3 V rail, but it adds transmit bursts to the rail the barometer and IMU use, so watch sensor noise during transmit.
 
 **Still to do:**
-- J2 pin 6 currently connects to +5V. Rewire it to +3V3 in the schematic and reroute it on the board. The 5 V trace to it currently runs about 45 mm along the bottom edge.
-- Update the BOM note ("VCC 5 V") for J2.
+- Bench-check E220 output power and range at 3.3 V.
+
+**Done 2026-11-17:** J2 pin 6 now connects to +3V3 in the schematic and on the board (a short stub and via to the +3V3 plane on In2.Cu), and the BOM note is updated. The board's +5V trunk used to run straight through that pad on F.Cu and on to the other 5 V loads, so it was re-routed: it now leaves the existing +5V via at the left of D10, runs on B.Cu under J2 (0.5 mm wide) and returns to F.Cu through a new via to the right of J2. This also pushed some neighbouring B.Cu traces aside. DRC counts did not change from before the edit (see `DRC-2026-11-17.rpt`), but the detour has not been reviewed beyond DRC.
 
 ## 4. Telemetry packet format: deferred
 
@@ -54,4 +55,4 @@ No effect on the PCB. Decide when firmware work starts.
 
 ## BOM status
 
-The Google Sheet "Fledgling BOM" and `bom/Fledgling_BOM.csv` now carry the decisions above: C35 (560 pF) and C36 (330 pF, shares the C41 part) as DNP feed-forward capacitors, J2 pin 6 noted as 3.3 V, and F1 recorded as 5 A pending a bench measurement. The schematic and PCB have not been changed yet.
+The Google Sheet "Fledgling BOM" and `bom/Fledgling_BOM.csv` now carry the decisions above: C35 (560 pF) and C36 (330 pF, shares the C41 part) as DNP feed-forward capacitors, J2 pin 6 noted as 3.3 V, and F1 recorded as 5 A pending a bench measurement. The schematic and PCB were updated on 2026-11-17 (see above).

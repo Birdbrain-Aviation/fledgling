@@ -5039,7 +5039,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "47pF DNP"
+		(property "Value" "330pF DNP"
 			(at 222.25 104.14 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5081,7 +5081,7 @@
 				)
 			)
 		)
-		(property "LCSC Part" ""
+		(property "LCSC Part" "C1664"
 			(at 218.44 102.87 0)
 			(hide yes)
 			(show_name no)
@@ -7771,7 +7771,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "56pF DNP"
+		(property "Value" "560pF DNP"
 			(at 222.25 48.26 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7813,7 +7813,7 @@
 				)
 			)
 		)
-		(property "LCSC Part" ""
+		(property "LCSC Part" "C55393"
 			(at 218.44 46.99 0)
 			(hide yes)
 			(show_name no)

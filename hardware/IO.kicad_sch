@@ -10832,7 +10832,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+5V")
+		(lib_id "power:+3V3")
 		(at 100.33 80.01 90)
 		(unit 1)
 		(body_style 1)
@@ -10853,8 +10853,8 @@
 				)
 			)
 		)
-		(property "Value" "+5V"
-			(at 95.25 80.01 90)
+		(property "Value" "+3V3"
+			(at 96.774 80.01 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10865,6 +10865,7 @@
 		)
 		(property "Footprint" ""
 			(at 100.33 80.01 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10875,6 +10876,7 @@
 		)
 		(property "Datasheet" ""
 			(at 100.33 80.01 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10883,8 +10885,9 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
 			(at 100.33 80.01 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
