@@ -7,8 +7,9 @@ Status of the Fledgling board as of the saved files. Sources: the 2026-11-14 DRC
 - [ ] **Plane connections.** The DRC report lists 26 unconnected items, nearly all plane or power nets: U3's +3V3 pins (11, 38) and the decoupling capacitors around it (C15, C16, C17, R8, R32, D7), U3 GND pad 47, J12 pin 2, and VBUS at J1 pad A9 and U7 pin 5. Fix with vias to the planes or a local +3V3 pour under U3.
 - [ ] **Dangling vias (22).** Several are on signal nets (QSPI_SCLK, QSPI_SD2, QSPI_SD3, SWCLK, SWD, GPIO6, GPIO12, GPIO18, load-cell lines). Each needs checking: either a leftover stub to delete or a route that was never finished.
 - [ ] **Dangling tracks (4).** On Net-(D8-DO) near J7, PYRO_BUS near J8, GPIO22 near C16 (11 mm long), and GPIO2 near J13.
-- [ ] **DRC errors (4 real, besides the 25 unconnected items).** From the 2026-11-17 run: a GND via shorting J1 pad B8 (SBU2), a hole-clearance violation (0.125 mm against 0.25 mm) and a front solder-mask bridge at the same pad, and the J13 GND thermal relief with 1 spoke where 2 are required (J13 is Do Not Populate). The J1 pad B8 items are the ones to fix first.
-- [ ] **Dead-end +5V stub.** About 3 mm of the old +5V diagonal near J2 pin 6 is left floating after the reroute. Delete it (5 dangling tracks now, was 4).
+- [x] **J1 pad B8 short** (GND via over SBU2, with hole-clearance and mask-bridge errors): fixed 2026-11-17 by moving the via 0.18 mm.
+- [ ] **J13 thermal relief.** GND pin has 1 spoke where 2 are required. J13 is Do Not Populate.
+- [x] **Dead-end +5V copper near J2** removed 2026-11-17.
 - [ ] **Silkscreen.** Not started: 38 reference designators, the logo and function labels. The report shows 17 overlaps, 10 pads clipped by solder mask and 6 clipped by the board edge (all at the MH1 corner).
 - [ ] **Library mismatches.** 5 footprints differ from their library copies and 3 are missing from the Fledgling library. These predate the layout work.
 - [ ] **3D check** of XT30 and USB-C mating directions.

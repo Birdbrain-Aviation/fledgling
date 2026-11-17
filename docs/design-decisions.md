@@ -56,3 +56,9 @@ No effect on the PCB. Decide when firmware work starts.
 ## BOM status
 
 The Google Sheet "Fledgling BOM" and `bom/Fledgling_BOM.csv` now carry the decisions above: C35 (560 pF) and C36 (330 pF, shares the C41 part) as DNP feed-forward capacitors, J2 pin 6 noted as 3.3 V, and F1 recorded as 5 A pending a bench measurement. The schematic and PCB were updated on 2026-11-17 (see above).
+
+## 4. Layout fixes, 2026-11-17 (made by Claude with design control delegated by me)
+
+- **J1 pad B8 short.** A GND stitching via at (108.67, 118.97) mm sat on top of USB-C pad B8 (SBU2, unconnected). This caused the short, hole-clearance and front solder-mask bridge errors. Deleting it was tried first, but it was the only via feeding a small B.Cu GND island, so the island went unconnected. The via was moved 0.18 mm right instead, to (108.85, 118.97) mm, which clears the pad and still stitches the island. All three errors cleared.
+- **Leftover +5V copper near J2.** After the +5V trunk was re-routed under J2 on B.Cu, about 5 mm of the old F.Cu +5V route (the diagonal past the RADIO label and the short run above C48) was left dangling. It was removed in four segments. C48 pad 1 still connects to +5V through the trunk.
+- DRC after these changes (`DRC-2026-11-17-block1.rpt`): 26 errors (25 of them unconnected items, plus the J13 thermal relief), 67 warnings.
