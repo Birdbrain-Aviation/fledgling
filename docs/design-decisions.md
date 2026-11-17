@@ -62,3 +62,10 @@ The Google Sheet "Fledgling BOM" and `bom/Fledgling_BOM.csv` now carry the decis
 - **J1 pad B8 short.** A GND stitching via at (108.67, 118.97) mm sat on top of USB-C pad B8 (SBU2, unconnected). This caused the short, hole-clearance and front solder-mask bridge errors. Deleting it was tried first, but it was the only via feeding a small B.Cu GND island, so the island went unconnected. The via was moved 0.18 mm right instead, to (108.85, 118.97) mm, which clears the pad and still stitches the island. All three errors cleared.
 - **Leftover +5V copper near J2.** After the +5V trunk was re-routed under J2 on B.Cu, about 5 mm of the old F.Cu +5V route (the diagonal past the RADIO label and the short run above C48) was left dangling. It was removed in four segments. C48 pad 1 still connects to +5V through the trunk.
 - DRC after these changes (`DRC-2026-11-17-block1.rpt`): 26 errors (25 of them unconnected items, plus the J13 thermal relief), 67 warnings.
+
+## 5. Dangling vias and tracks, 2026-11-17
+
+- **15 pass-through vias removed.** These sat in the middle of a track on one layer with nothing on the other layer, so they did no electrical work: GPIO12, GPIO18, LOADCELL_A-, LOADCELL_EXC (2), U5_BST, QSPI_SCLK, QSPI_SD2, QSPI_SD3, SWCLK, SWD, Net-(D3-A1) (2), Net-(Q1-G) and VSYS. Removing them takes away drill hits and small antenna stubs on the QSPI and SWD lines.
+- **Dead stubs removed** at GPIO6 (via plus about 3 mm off J2 pin 1), Net-(Q3-G) (via plus 1.2 mm off Q3), PYRO_BUS (1.1 mm off J8), GPIO2 (0.7 mm off R31) and Net-(D8-DO) (1.5 mm overshoot past a T-junction on B.Cu). Each net was checked before and after: connectivity is unchanged, and unconnected stays at 25.
+- **Kept on purpose:** the 5 VBUS vias near J1/D2/U7 belong with the VBUS plane connection (next block), and the long GPIO22 track flagged as dangling is the real route to J13 pin 6. It overshoots the pad slightly, which is cosmetic. Deleting it disconnected J13 pin 6, so it was restored.
+- DRC after this block (`DRC-2026-11-17-block2.rpt`): 26 errors (25 unconnected and the J1 shield thermal relief), 47 warnings.
