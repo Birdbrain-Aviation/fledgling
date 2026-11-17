@@ -5,9 +5,9 @@ Status of the Fledgling board as of the saved files. Sources: the 2026-11-14 DRC
 ## Layout
 
 - [ ] **Plane connections (main open task).** 23 unconnected items (D7 and C17 fixed 2026-11-17 with 0.45/0.2 mm vias), all power. Every pour connects through-hole pads only, so each SMD power pad needs its own via. The +3V3 pins of U3 (1/53/54, 11, 20, 38, 44/45/49), the B.Cu decoupling parts (C15, C16, C17, R8, R32, D7) and J12.2 have none. Neither does GND at U3.47/C11.2, nor VBUS at J1 A9/B4 and U7.5. The area is too dense for an automatic fix: it needs a hand re-route of the U3 power fan-out. See design-decisions.md section 6.
-- [x] **Dangling vias and tracks** cleaned up 2026-11-17: 15 pass-through vias and 5 dead stubs removed. Left: 5 VBUS vias, to be tied in with the VBUS plane work, and a cosmetic GPIO22 overshoot at J13 pin 6.
+- [x] **Dangling vias and tracks** cleaned up 2026-11-17: 15 pass-through vias and 5 dead stubs removed. Left: a cosmetic GPIO22 overshoot at J13 pin 6.
 - [x] **J1 pad B8 short** (GND via over SBU2, with hole-clearance and mask-bridge errors): fixed 2026-11-17 by moving the via 0.18 mm.
-- [ ] **Thermal relief error.** KiCad 10 reports it on J1's GND shield pin (B.Cu, 1 spoke to an isolated island). The older report named J13.
+- [x] **Thermal relief error** on J1's shield pin fixed 2026-11-17 (shield pads set to solid connection).
 - [x] **Dead-end +5V copper near J2** removed 2026-11-17.
 - [ ] **Silkscreen.** Not started: 38 reference designators, the logo and function labels. The report shows 17 overlaps, 10 pads clipped by solder mask and 6 clipped by the board edge (all at the MH1 corner).
 - [ ] **Library mismatches.** 5 footprints differ from their library copies and 3 are missing from the Fledgling library. These predate the layout work.
