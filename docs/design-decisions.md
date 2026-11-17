@@ -88,3 +88,12 @@ Board unchanged in this block. What was found:
 - **VBUS In2.Cu zone.** It was the same priority (0) as the board-wide +3V3 plane on In2, so the fill between them was ambiguous. It also stopped short of the five VBUS vias around J1, which is why they showed as dangling. The zone now has priority 1 and is enlarged to 104-113 x 116.5-126.5 mm. No +3V3 via or In2 track sits in that area. The five VBUS vias are now on the plane, which removed 5 warnings. J1 A9/B4 and U7 pin 5 are still unconnected: their F.Cu stubs don't reach any of those vias. They need the same short hand-routed hop as the U3 pads.
 - **J1 shield pads.** The four GND shield pads of the USB-C connector are set to a solid zone connection instead of thermal relief. This fixes the "1 spoke to an isolated island" error and gives the shield a stronger ground. Soldering those pads needs a little more heat.
 - DRC after this block (`DRC-2026-11-17-block4.rpt`): 23 errors (all unconnected items), 42 warnings.
+
+## 8. Silkscreen pass 1: written but not verified (2026-11-17)
+
+These edits were made by script. They are in `hardware/pending/Fledgling_silk-pass1_UNVERIFIED.kicad_pcb`, **not** in `hardware/Fledgling.kicad_pcb`:
+- Removed connector outline segments that ran past the board edge (3 each on J1, J5, J9), 3 J9 segments overlapping J5, and 2 Q1 segments lying on Q2's pads.
+- Hid the D1, C28 and C20 reference designators, which overlapped J10 or labels.
+- Moved RADIO 0.5 mm left, LOAD CELL 0.25 mm down, PYRO BATT to horizontal at (162.75, 113.15), and MAIN BATT to vertical at (158.0, 126.8). Each new spot was checked by script to clear pads by 0.25 mm. It was not checked against other silkscreen.
+
+A Windows Update notification then took over the screen, and the PC went offline before KiCad DRC could run. **The file on the PC (`Desktop\Fledgling\Fledgling.kicad_pcb`) holds these unverified edits.** If they cause problems, restore the repo's `hardware/Fledgling.kicad_pcb` (the verified block-4 state: 23 errors, 42 warnings).
