@@ -69,3 +69,14 @@ The Google Sheet "Fledgling BOM" and `bom/Fledgling_BOM.csv` now carry the decis
 - **Dead stubs removed** at GPIO6 (via plus about 3 mm off J2 pin 1), Net-(Q3-G) (via plus 1.2 mm off Q3), PYRO_BUS (1.1 mm off J8), GPIO2 (0.7 mm off R31) and Net-(D8-DO) (1.5 mm overshoot past a T-junction on B.Cu). Each net was checked before and after: connectivity is unchanged, and unconnected stays at 25.
 - **Kept on purpose:** the 5 VBUS vias near J1/D2/U7 belong with the VBUS plane connection (next block), and the long GPIO22 track flagged as dangling is the real route to J13 pin 6. It overshoots the pad slightly, which is cosmetic. Deleting it disconnected J13 pin 6, so it was restored.
 - DRC after this block (`DRC-2026-11-17-block2.rpt`): 26 errors (25 unconnected and the J1 shield thermal relief), 47 warnings.
+
+## 6. Plane connections around U3: tried, not fixed (2026-11-17)
+
+Board unchanged in this block. What was found:
+
+- All the copper pours (GND on F.Cu, B.Cu, In1.Cu; +3V3 and VBUS on In2.Cu) are set to **connect through-hole pads only**. So an SMD pad never joins a pour on its own layer. It needs its own via to the inner plane. 12 groups of +3V3 SMD pads have no such via: U3 pins 1/53/54, 11, 20, 38 and 44/45/49, the B.Cu decoupling parts C15, C16, C17, R8, R32 and D7, and J12 pin 2. GND has U3 pin 47 and C11.2. VBUS has J1 A9/B4 and U7 pin 5.
+- **Tried: a local +3V3 pour on B.Cu under U3.** It fragmented into islands, created new GND islands, and added 6 thermal-relief errors without reducing the unconnected count. Reverted.
+- **Tried: letting the F.Cu and B.Cu GND pours connect SMD pads.** That gave 37 errors and the same 25 unconnected. Reverted.
+- **Tried: an automated via placer** (0.55/0.25 mm vias, 0.127 mm clearance, stubs up to 3 mm). It found no legal spot for any of these pads. The U3 area has 0.127 mm signal traces on every layer within about 2 mm of each pad.
+
+**What it needs:** a hand re-route of the U3 power fan-out. Put the +3V3 vias in the gaps between pad rows, or push some GPIO and QSPI traces out of the way. Then add a via next to each B.Cu decoupling cap. A tighter via (0.45/0.2 mm) would make room if the fab supports it. JLCPCB's 4-layer process does. This is the main open layout task.

@@ -4,7 +4,7 @@ Status of the Fledgling board as of the saved files. Sources: the 2026-11-14 DRC
 
 ## Layout
 
-- [ ] **Plane connections.** The DRC report lists 26 unconnected items, nearly all plane or power nets: U3's +3V3 pins (11, 38) and the decoupling capacitors around it (C15, C16, C17, R8, R32, D7), U3 GND pad 47, J12 pin 2, and VBUS at J1 pad A9 and U7 pin 5. Fix with vias to the planes or a local +3V3 pour under U3.
+- [ ] **Plane connections (main open task).** 25 unconnected items, all power. Every pour connects through-hole pads only, so each SMD power pad needs its own via. The +3V3 pins of U3 (1/53/54, 11, 20, 38, 44/45/49), the B.Cu decoupling parts (C15, C16, C17, R8, R32, D7) and J12.2 have none. Neither does GND at U3.47/C11.2, nor VBUS at J1 A9/B4 and U7.5. The area is too dense for an automatic fix: it needs a hand re-route of the U3 power fan-out. See design-decisions.md section 6.
 - [x] **Dangling vias and tracks** cleaned up 2026-11-17: 15 pass-through vias and 5 dead stubs removed. Left: 5 VBUS vias, to be tied in with the VBUS plane work, and a cosmetic GPIO22 overshoot at J13 pin 6.
 - [x] **J1 pad B8 short** (GND via over SBU2, with hole-clearance and mask-bridge errors): fixed 2026-11-17 by moving the via 0.18 mm.
 - [ ] **Thermal relief error.** KiCad 10 reports it on J1's GND shield pin (B.Cu, 1 spoke to an isolated island). The older report named J13.
