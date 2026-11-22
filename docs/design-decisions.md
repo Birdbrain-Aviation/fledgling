@@ -102,3 +102,11 @@ These edits were made by script and are now in `hardware/Fledgling.kicad_pcb`:
 
 - **J12 pin 2 (OLED +3V3) connected.** A 3.2 mm piece of /GPIO3 on F.Cu ran between J12.2 and the only spot where a via fits. It was ripped up and rerouted as a short arch around a new 0.45/0.2 mm +3V3 via at (131.94, 133.51), with a 0.2 mm stub from J12.2. KiCad DRC (`DRC-2026-11-21-j12.rpt`): 22 errors / 13 warnings / 22 unconnected, with no new violations.
 - **Tried for the other 22 and failed:** a scripted rip-up-and-reroute (2-layer maze router, plus In1 as an escape layer), via sizes down to 0.4/0.2 mm, and a 0.25 mm hole-to-hole rule. None of them freed the RP2350 +3V3 pins, its B.Cu decoupling caps, the USB VBUS pads, or U3.47/C11.2 GND. A 0.3/0.15 mm via would free three of the U3 groups, but that drill is below JLCPCB's standard 0.2 mm multilayer minimum, so it was not used.
+
+## 10. Freerouting attempt (2026-11-22)
+
+Freerouting (open-source autorouter) was tried on the Specctra DSN export, with the In2 plane overlap fixed and vias limited to 0.45/0.2 mm.
+- Incremental run (existing routing kept): no vias added and no power connections made.
+- Rip-up run: all signal routing in a 19 x 20 mm box around U3 (except USB D+/D-, XIN/XOUT, VREG_LX, VREG_AVDD) was removed and re-routed from scratch. It placed 11 new +3V3 vias but left the region incomplete. After import, KiCad DRC showed 82 errors and 36 unconnected (worse than 22), and the imported vias had a 0.075 mm annular ring. Not kept. The board is unchanged from section 9.
+
+Conclusion: the U3 area has too little routing room at the current placement and via size for any router, automatic or scripted, to fit the RP2350's power vias. The realistic fixes are placement changes: spread the U3 decoupling caps, move the flash (U1) and the +1V1 regulator parts away from U3, or move to a 6-layer stackup.
