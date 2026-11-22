@@ -1,5 +1,7 @@
 # Remaining work (WIP)
 
+**2026-11-22: all routing was cleared** (traces and vias; parts, zones and outline kept) to re-place parts around the RP2350 and re-route. The routed board these notes refer to is in `hardware/archive/Fledgling_routed_2026-11-21.kicad_pcb`. Plan for the next session: spread the U3 decoupling caps, move U1 (flash) and the +1V1 regulator parts outward, plan a via for every power pin before routing signals, then re-route (USB pair and crystal first, power fan-out next, signals last).
+
 Status of the Fledgling board as of the saved files. Sources: the 2026-11-14 DRC report in this folder, the layout log, and a script-based check of `hardware/Fledgling.kicad_pcb` (`tools/`). KiCad's own DRC is the authority. The script check is approximate and is only meant to point at where to look.
 
 ## Layout

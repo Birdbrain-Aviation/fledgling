@@ -58,6 +58,7 @@ Symbols and footprints are embedded in the schematic and board files, so the des
 
 ## Known state (WIP)
 
+- **2026-11-22: routing cleared for re-placement.** All traces and vias were removed so parts around the RP2350 can be moved and the board re-routed; the previous fully routed version (22 errors / 13 warnings, 22 unconnected power connections) is kept in `hardware/archive/Fledgling_routed_2026-11-21.kicad_pcb`. The DRC notes below describe that archived version.
 - Last DRC run (2026-11-21, `docs/DRC-2026-11-21-j12.rpt`, with zones refilled): **22 errors and 13 warnings**. All 22 errors are unconnected power connections: the RP2350's +3V3 supply pins and its B.Cu decoupling caps have no via to the In2.Cu +3V3 plane, plus two GND and three VBUS pads and some small GND pour islands. Signal traces on both outer layers block every via spot, so the RP2350 power fan-out needs re-routing by hand. The warnings are footprint-library mismatches and one track overshoot. Silkscreen is clean. Gerbers in `fab/` are exported but marked NOT FOR FAB until the power connections are done.
 - Changes on 2026-11-17: E220 supply (J2 pin 6) moved from +5V to +3V3, with the +5V trunk re-routed under J2 on B.Cu; C35/C36 feed-forward capacitor values set. See `docs/design-decisions.md`.
 - Connector orientation (USB-C and XT30) checked. See `docs/layout-log-2026-11-14.md` and `docs/design-decisions.md` for the full history.
