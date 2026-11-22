@@ -58,7 +58,7 @@ Symbols and footprints are embedded in the schematic and board files, so the des
 
 ## Known state (WIP)
 
-- Last DRC run (2026-11-17, `docs/DRC-2026-11-21-block5.rpt`, with zones refilled): **23 errors and 20 warnings**. All 23 errors are unconnected power pads (mostly U3's +3V3 pins and decoupling, plus J1/U7 VBUS) that need hand-routed vias to the inner planes. A short at USB-C pad B8 was fixed on 2026-11-17. The warnings are footprint-library mismatches and one cosmetic track overshoot. The earlier 2026-11-14 report (`docs/DRC-2026-11-14.rpt`) showed 1 error; the board was edited after it.
+- Last DRC run (2026-11-17, `docs/DRC-2026-11-21-block5.rpt`, with zones refilled): **23 errors and 20 warnings**. All 23 errors are unconnected power pads (mostly U3's +3V3 pins and decoupling, plus J1/U7 VBUS) that need hand-routed vias to the inner planes. A short at USB-C pad B8 was fixed on 2026-11-17. The warnings are footprint-library mismatches, 7 cosmetic silkscreen overlaps and one track overshoot. The earlier 2026-11-14 report (`docs/DRC-2026-11-14.rpt`) showed 1 error; the board was edited after it.
 - Changes on 2026-11-17: E220 supply (J2 pin 6) moved from +5V to +3V3, with the +5V trunk re-routed under J2 on B.Cu; C35/C36 feed-forward capacitor values set. See `docs/design-decisions.md`.
 - Silkscreen, a 3D check of the XT30 and USB-C mating directions, and Gerber export have not been done. See `docs/layout-log-2026-11-14.md` for the full layout log.
 - The BOM is a draft. Some prices are optimistic LCSC "from" prices, some parts are marked pending (pyro fuse rating, load cell capacity), and a few parts have low stock. See the Status and Notes columns in `bom/Fledgling_BOM.csv`.

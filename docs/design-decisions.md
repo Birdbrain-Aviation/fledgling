@@ -96,4 +96,4 @@ These edits were made by script and are now in `hardware/Fledgling.kicad_pcb`:
 - Hid the D1, C28 and C20 reference designators, which overlapped J10 or labels.
 - Moved RADIO 0.5 mm left, LOAD CELL 0.25 mm down, PYRO BATT to horizontal at (162.75, 113.15), and MAIN BATT to vertical at (158.0, 126.8). Each new spot was checked by script to clear pads by 0.25 mm. It was not checked against other silkscreen.
 
-**Verified 2026-11-21:** KiCad DRC (`DRC-2026-11-21-block5.rpt`) shows 23 errors (all unconnected power pads, unchanged) and 20 warnings (down from 42). No silkscreen warnings remain.
+**Verified 2026-11-21:** KiCad DRC (`DRC-2026-11-21-block5.rpt`) shows 23 errors (all unconnected power pads, unchanged) and 20 warnings (down from 42). Pad and board-edge silkscreen warnings are all cleared. 7 silk-on-silk overlaps remain: the LOAD CELL, RADIO, PYRO BATT and MAIN BATT labels touch the J13, X1 and C20 outlines and the R25/R26 reference designators. They are cosmetic but should be nudged.
