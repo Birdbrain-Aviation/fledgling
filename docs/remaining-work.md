@@ -9,7 +9,7 @@ Status of the Fledgling board as of the saved files. Sources: the 2026-11-14 DRC
 - [x] **J1 pad B8 short** (GND via over SBU2, with hole-clearance and mask-bridge errors): fixed 2026-11-17 by moving the via 0.18 mm.
 - [x] **Thermal relief error** on J1's shield pin fixed 2026-11-17 (shield pads set to solid connection).
 - [x] **Dead-end +5V copper near J2** removed 2026-11-17.
-- [ ] **Silkscreen.** Not started: 38 reference designators, the logo and function labels. The report shows 17 overlaps, 10 pads clipped by solder mask and 6 clipped by the board edge (all at the MH1 corner).
+- [x] **Silkscreen clean-up** (2026-11-21): all silk overlap, edge and over-copper warnings cleared. Function labels (pyro channels, battery polarity) could still be added.
 - [ ] **Library mismatches.** 5 footprints differ from their library copies and 3 are missing from the Fledgling library. These predate the layout work.
 - [ ] **3D check** of XT30 and USB-C mating directions.
 - [x] **DRC re-run** on 2026-11-17 (`DRC-2026-11-17.rpt`): 29 errors (25 of them unconnected items), 68 warnings. Re-run again after the layout items above.
