@@ -58,9 +58,9 @@ Symbols and footprints are embedded in the schematic and board files, so the des
 
 ## Known state (WIP)
 
-- Last DRC run (2026-11-17, `docs/DRC-2026-11-21-silk2.rpt`, with zones refilled): **23 errors and 13 warnings**. All 23 errors are unconnected power pads (mostly U3's +3V3 pins and decoupling, plus J1/U7 VBUS) that need hand-routed vias to the inner planes. A short at USB-C pad B8 was fixed on 2026-11-17. The warnings are footprint-library mismatches and one track overshoot. The earlier 2026-11-14 report (`docs/DRC-2026-11-14.rpt`) showed 1 error; the board was edited after it.
+- Last DRC run (2026-11-21, `docs/DRC-2026-11-21-j12.rpt`, with zones refilled): **22 errors and 13 warnings**. All 22 errors are unconnected power connections: the RP2350's +3V3 supply pins and its B.Cu decoupling caps have no via to the In2.Cu +3V3 plane, plus two GND and three VBUS pads and some small GND pour islands. Signal traces on both outer layers block every via spot, so the RP2350 power fan-out needs re-routing by hand. The warnings are footprint-library mismatches and one track overshoot. Silkscreen is clean. Gerbers in `fab/` are exported but marked NOT FOR FAB until the power connections are done.
 - Changes on 2026-11-17: E220 supply (J2 pin 6) moved from +5V to +3V3, with the +5V trunk re-routed under J2 on B.Cu; C35/C36 feed-forward capacitor values set. See `docs/design-decisions.md`.
-- Silkscreen, a 3D check of the XT30 and USB-C mating directions, and Gerber export have not been done. See `docs/layout-log-2026-11-14.md` for the full layout log.
+- Connector orientation (USB-C and XT30) checked. See `docs/layout-log-2026-11-14.md` and `docs/design-decisions.md` for the full history.
 - The BOM is a draft. Some prices are optimistic LCSC "from" prices, some parts are marked pending (pyro fuse rating, load cell capacity), and a few parts have low stock. See the Status and Notes columns in `bom/Fledgling_BOM.csv`.
 - Layout is incomplete and messy.
 - The design has changed since my first sketches (it started as a 30 x 80 mm 2-layer board), so the early notes don't all match the current board.
