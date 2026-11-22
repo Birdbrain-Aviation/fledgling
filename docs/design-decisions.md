@@ -97,3 +97,8 @@ These edits were made by script and are now in `hardware/Fledgling.kicad_pcb`:
 - Moved RADIO 0.5 mm left, LOAD CELL 0.25 mm down, PYRO BATT to horizontal at (162.75, 113.15), and MAIN BATT to vertical at (158.0, 126.8). Each new spot was checked by script to clear pads by 0.25 mm. It was not checked against other silkscreen.
 
 **Verified 2026-11-21:** KiCad DRC (`DRC-2026-11-21-block5.rpt`) shows 23 errors (all unconnected power pads, unchanged) and 20 warnings (down from 42). Pad and board-edge silkscreen warnings are all cleared. 7 silk-on-silk overlaps remain: the LOAD CELL, RADIO, PYRO BATT and MAIN BATT labels touch the J13, X1 and C20 outlines and the R25/R26 reference designators. They are cosmetic but should be nudged.
+
+## 9. J12 pin 2 to +3V3, and the automated rip-up attempt (2026-11-21)
+
+- **J12 pin 2 (OLED +3V3) connected.** A 3.2 mm piece of /GPIO3 on F.Cu ran between J12.2 and the only spot where a via fits. It was ripped up and rerouted as a short arch around a new 0.45/0.2 mm +3V3 via at (131.94, 133.51), with a 0.2 mm stub from J12.2. KiCad DRC (`DRC-2026-11-21-j12.rpt`): 22 errors / 13 warnings / 22 unconnected, with no new violations.
+- **Tried for the other 22 and failed:** a scripted rip-up-and-reroute (2-layer maze router, plus In1 as an escape layer), via sizes down to 0.4/0.2 mm, and a 0.25 mm hole-to-hole rule. None of them freed the RP2350 +3V3 pins, its B.Cu decoupling caps, the USB VBUS pads, or U3.47/C11.2 GND. A 0.3/0.15 mm via would free three of the U3 groups, but that drill is below JLCPCB's standard 0.2 mm multilayer minimum, so it was not used.
