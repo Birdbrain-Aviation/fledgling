@@ -4,7 +4,17 @@ Status of the Fledgling board as of the saved files. Sources: the 2026-11-14 DRC
 
 ## Layout
 
-- [ ] **Plane connections (main open task).** 23 unconnected items (D7 and C17 fixed 2026-11-17 with 0.45/0.2 mm vias), all power. Every pour connects through-hole pads only, so each SMD power pad needs its own via. The +3V3 pins of U3 (1/53/54, 11, 20, 38, 44/45/49), the B.Cu decoupling parts (C15, C16, C17, R8, R32, D7) and J12.2 have none. Neither does GND at U3.47/C11.2, nor VBUS at J1 A9/B4 and U7.5. The area is too dense for an automatic fix: it needs a hand re-route of the U3 power fan-out. See design-decisions.md section 6.
+- [ ] **Plane connections (main open task).** 23 unconnected items. A grid maze router (2026-11-21) found no legal route or via spot for any of them. Each one is blocked by a specific trace on the opposite outer layer, so a via can't pass through:
+  - C15.1 and R8.1 (B.Cu): /QSPI_SD1 on F.Cu runs over both
+  - C16.1 (B.Cu): VSYS and /GPIO16 on F.Cu
+  - R32.1 (B.Cu): /GPIO16 on F.Cu
+  - U3.1 (F.Cu): a GND track on B.Cu; U3.11: /GPIO1 on B.Cu
+  - U3.38, U3.49: +1V1 and /VREG_LX traces around the pins on both layers
+  - U3.47 (GND) and C11.2: /VREG_LX, /VREG_AVDD, +3V3 and +1V1 traces
+  - J1 A9 (VBUS): /USB_D+ on B.Cu; U7.5 (VBUS): Net-(J1-CC1) on B.Cu
+  - J12.2 (+3V3): only route crosses the +5V trunk on F.Cu
+  - 12 small GND pour islands on B.Cu/F.Cu with no room for a stitching via
+  Fix: move those blocking traces (QSPI_SD1 and GPIO16 first: they clear four pads), then add vias. Re-routing the RP2350 regulator area (+1V1/VREG_LX) by hand is the bigger job.
 - [x] **Dangling vias and tracks** cleaned up 2026-11-17: 15 pass-through vias and 5 dead stubs removed. Left: a cosmetic GPIO22 overshoot at J13 pin 6.
 - [x] **J1 pad B8 short** (GND via over SBU2, with hole-clearance and mask-bridge errors): fixed 2026-11-17 by moving the via 0.18 mm.
 - [x] **Thermal relief error** on J1's shield pin fixed 2026-11-17 (shield pads set to solid connection).
