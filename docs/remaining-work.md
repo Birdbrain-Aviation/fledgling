@@ -19,9 +19,9 @@ Status of the Fledgling board as of the saved files. Sources: the 2026-11-14 DRC
 - [x] **J1 pad B8 short** (GND via over SBU2, with hole-clearance and mask-bridge errors): fixed 2026-11-17 by moving the via 0.18 mm.
 - [x] **Thermal relief error** on J1's shield pin fixed 2026-11-17 (shield pads set to solid connection).
 - [x] **Dead-end +5V copper near J2** removed 2026-11-17.
-- [x] **Silkscreen clean-up** (2026-11-21): silk over pads and board edge cleared. 7 cosmetic label-on-outline overlaps left (LOAD CELL, RADIO, PYRO BATT, MAIN BATT). Function labels (pyro channels, battery polarity) could still be added.
+- [x] **Silkscreen clean-up** (2026-11-21): no silkscreen warnings left. LOAD CELL, RADIO, PYRO BATT and MAIN BATT labels moved clear of pads and other silkscreen.
 - [ ] **Library mismatches.** 5 footprints differ from their library copies and 3 are missing from the Fledgling library. These predate the layout work.
-- [ ] **3D check** of XT30 and USB-C mating directions.
+- [x] **Connector orientation** checked from footprint geometry (2026-11-21): USB-C J1 opens off the left edge; XT30 J5/J9 have power pins inboard and support pegs at the right edge, so they mate off the edge. Pin 1 = GND, pin 2 = + on both. Neither has a 3D model linked.
 - [x] **DRC re-run** on 2026-11-17 (`DRC-2026-11-17.rpt`): 29 errors (25 of them unconnected items), 68 warnings. Re-run again after the layout items above.
 - [ ] **Gerber and drill export**, then a fab quote.
 

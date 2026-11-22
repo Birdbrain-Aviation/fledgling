@@ -897,7 +897,7 @@
 			)
 		)
 		(fp_text user "RADIO"
-			(at -18.749 13.125 0)
+			(at -18.749 11.875 0)
 			(layer "F.SilkS")
 			(uuid "e3d81a44-fe21-484d-88d1-1d9b886f75f7")
 			(effects
@@ -908,7 +908,7 @@
 			)
 		)
 		(fp_text user "LOAD CELL"
-			(at 2.6 13.375 0)
+			(at 4.1 13.875 0)
 			(layer "F.SilkS")
 			(uuid "97c51dd5-6138-460b-a451-b624185d4fe3")
 			(effects
@@ -36294,7 +36294,7 @@
 			)
 		)
 		(fp_text user "MAIN BATT"
-			(at 23 6.8 90)
+			(at 20.75 6.8 90)
 			(layer "B.SilkS")
 			(uuid "6f45949d-cc8b-4d14-88c4-1aa1977b5c06")
 			(effects
@@ -36306,12 +36306,12 @@
 			)
 		)
 		(fp_text user "PYRO BATT"
-			(at 27.75 -6.85 0)
+			(at 26 -8.1 0)
 			(layer "B.SilkS")
 			(uuid "cb4379c1-92df-4078-8e55-bbe82cb7eb91")
 			(effects
 				(font
-					(size 1 1)
+					(size 0.8 0.8)
 					(thickness 0.15)
 				)
 				(justify mirror)
