@@ -110,3 +110,20 @@ Freerouting (open-source autorouter) was tried on the Specctra DSN export, with 
 - Rip-up run: all signal routing in a 19 x 20 mm box around U3 (except USB D+/D-, XIN/XOUT, VREG_LX, VREG_AVDD) was removed and re-routed from scratch. It placed 11 new +3V3 vias but left the region incomplete. After import, KiCad DRC showed 82 errors and 36 unconnected (worse than 22), and the imported vias had a 0.075 mm annular ring. Not kept. The board is unchanged from section 9.
 
 Conclusion: the U3 area has too little routing room at the current placement and via size for any router, automatic or scripted, to fit the RP2350's power vias. The realistic fixes are placement changes: spread the U3 decoupling caps, move the flash (U1) and the +1V1 regulator parts away from U3, or move to a 6-layer stackup.
+
+## 11. Re-routing to 0 errors (2026-11-22)
+
+Result: KiCad 10.0.6 DRC with zones refilled, `DRC-2026-11-22-final.rpt`: **0 errors, 0 unconnected, 12 warnings** (library mismatches only). Pyro rules kept: `*PYRO_BUS*` 0.3 mm clearance and 1.0 mm tracks, 0.2 mm sense tap, 0.15 mm allowed inside the PyroTap rule area. Vias 0.45/0.2 mm, copper-to-edge 0.3 mm.
+
+**Part moves.** Only one: **L1 from (116.3, 121.0) to (116.3, 120.95)**, to open a 0.05 mm gap for the GPIO0/GPIO1/GPIO15/+3V3 tracks beside it. Larger moves were tried and reverted: moving L1 0.9 mm left left GPIO1 with a 0.16 mm corridor; moving the ADC-divider caps C21/C22 out of their slots made the lattice no easier. C21/C22 are in their original slots (118.0, 111.75) and (115.5, 113.25). No other part, connector, mounting hole, outline or silkscreen label footprint moved, and the schematic and nets are unchanged.
+
+**How it was routed.** The RP2350 pins use jogged escape stubs with planner vias to the +3V3/GND planes. The remaining nets were routed by a grid maze router (0.025 mm grid, clearance maps) and checked with a local DRC model that was calibrated against KiCad's clearance results, then confirmed in KiCad. Each SMD GND/+3V3 pad has its own via or a track to one, since the pours only connect to through-hole pads.
+
+**The hard region: the ADC divider lattice** (B.Cu 0603s northeast of U3, R10-R19, C21-C23, Q1/Q2 gate parts). Decisions made there:
+- The pyro sense tap (R10.1 to the PYRO_BUS bus) cannot be re-routed by the router, because outside the small tap area it needs 0.3 mm clearance. It was kept as a hand route; only its second via moved from (123.125, 110.6) to (123.525, 110.9) to clear R18.1 (PYRO2_N pad) by 0.3 mm, and its end now runs into J8.1's pad.
+- GPIO26's divider node (R16.2/C22.1) could not reach R17.1 and Q1-G's hub via at the same time. Fix: the Q1-G via hub moved to (115.5, 108.375), between R17.1 and R12.2, with Q1-G's east half routed on F.Cu over the top; the GPIO14 hub via moved to (116.12, 108.375) and its F.Cu run to y=108.85. The GND vias of that lattice were re-seated afterwards (Q2.3's via sits at (119.85, 114.85) inside its pad).
+- Track ends that touched a pad only at a rounded corner (KiCad counted them as unconnected) got short stubs to the pad centre.
+
+**Tried and not kept:** Freerouting on the whole board (see section 10; also used the wrong widths for PYRO_BUS in one experiment, which was caught and discarded); soft rip-up routing (cascades through the dense lattice).
+
+**Not done:** electrical review of the generated routing, fab CAM check, and a hand tidy of small jogs.

@@ -1,12 +1,12 @@
 # Remaining work (WIP)
 
-**2026-11-22: all routing was cleared** (traces and vias; parts, zones and outline kept) to re-place parts around the RP2350 and re-route. The routed board these notes refer to is in `hardware/archive/Fledgling_routed_2026-11-21.kicad_pcb`. Plan for the next session: spread the U3 decoupling caps, move U1 (flash) and the +1V1 regulator parts outward, plan a via for every power pin before routing signals, then re-route (USB pair and crystal first, power fan-out next, signals last).
+**2026-11-22: board routed to 0 DRC errors and 0 unconnected items** (`DRC-2026-11-22-final.rpt`, KiCad 10.0.6, zones refilled, 12 library warnings only). Parts were left in place except L1 (0.05 mm). The older notes below that describe the 22 unconnected power items are kept as history; they are resolved.
 
 Status of the Fledgling board as of the saved files. Sources: the 2026-11-14 DRC report in this folder, the layout log, and a script-based check of `hardware/Fledgling.kicad_pcb` (`tools/`). KiCad's own DRC is the authority. The script check is approximate and is only meant to point at where to look.
 
 ## Layout
 
-- [ ] **Plane connections (main open task).** 22 unconnected items (J12.2 fixed 2026-11-21). A grid maze router (2026-11-21) found no legal route or via spot for any of them. Each one is blocked by a specific trace on the opposite outer layer, so a via can't pass through:
+- [x] **Plane connections (done 2026-11-22; notes below are history).** 22 unconnected items (J12.2 fixed 2026-11-21). A grid maze router (2026-11-21) found no legal route or via spot for any of them. Each one is blocked by a specific trace on the opposite outer layer, so a via can't pass through:
   - C15.1 and R8.1 (B.Cu): /QSPI_SD1 on F.Cu runs over both
   - C16.1 (B.Cu): VSYS and /GPIO16 on F.Cu
   - R32.1 (B.Cu): /GPIO16 on F.Cu
@@ -24,7 +24,10 @@ Status of the Fledgling board as of the saved files. Sources: the 2026-11-14 DRC
 - [ ] **Library mismatches.** 5 footprints differ from their library copies and 3 are missing from the Fledgling library. These predate the layout work.
 - [x] **Connector orientation** checked from footprint geometry (2026-11-21): USB-C J1 opens off the left edge; XT30 J5/J9 have power pins inboard and support pegs at the right edge, so they mate off the edge. Pin 1 = GND, pin 2 = + on both. Neither has a 3D model linked.
 - [x] **DRC re-run** on 2026-11-17 (`DRC-2026-11-17.rpt`): 29 errors (25 of them unconnected items), 68 warnings. Re-run again after the layout items above.
-- [x] **Gerber and drill export** (2026-11-21), in `fab/`, marked NOT FOR FAB. Re-export after the plane connections are fixed, then get a fab quote.
+- [x] **Gerber and drill export** re-done 2026-11-22 from the DRC-clean board: `fab/Fledgling-gerbers-2026-11-22.zip`.
+- [ ] **Fab quote and CAM check** (JLCPCB 4-layer) before ordering.
+- [ ] **Electrical review of the generated routing**: buck-converter loops, USB pair, QSPI, ADC divider lattice (U3 east side), pyro sense tap, GND pour stitching.
+- [ ] **Tidy-up**: many short jogs near U3 could be cleaned by hand.
 
 ## Design decisions
 

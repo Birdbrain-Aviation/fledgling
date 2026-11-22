@@ -1,7 +1,7 @@
-# Fabrication outputs: NOT FOR FAB
+# Fabrication outputs
 
-`Fledgling-gerbers-NOT-FOR-FAB-2026-11-21.zip` holds the Gerbers (F.Cu, In1.Cu, In2.Cu, B.Cu, mask, paste, silkscreen, Edge.Cuts, job file) and the Excellon drill files (PTH and NPTH). They were exported from KiCad 10 on 2026-11-21 from the board in `hardware/` at that date.
+`Fledgling-gerbers-2026-11-22.zip` holds the Gerbers (F.Cu, In1.Cu, In2.Cu, B.Cu, mask, paste, silkscreen, Edge.Cuts, job file) and the Excellon drill files (PTH and NPTH), exported from KiCad 10.0.6 on 2026-11-22 from the board in `hardware/` at commit time. That board has 0 DRC errors and 0 unconnected items (`docs/DRC-2026-11-22-final.rpt`).
 
-**Do not order from these.** KiCad DRC still reports 22 unconnected power connections (see `docs/remaining-work.md`). Most are the RP2350's +3V3 pins and decoupling caps with no via to the In2.Cu +3V3 plane, so a board built from these files would not power up correctly. They are here to show the layer set and to let the board be previewed in a Gerber viewer such as JLCPCB's.
+**Still not checked by a fab.** Nothing has been ordered, no CAM check has been run, and the routing has not been reviewed electrically (see `docs/remaining-work.md`). Do a JLCPCB (or other fab) CAM check and read the layer previews before ordering.
 
-Settings: 4.6 mm coordinate format, X2 attributes with netlist, Gerber job file, drill origin absolute, millimetres.
+Settings: 4.6 mm coordinate format, X2 attributes with netlist, Gerber job file, drill origin absolute, millimetres. Files were renamed from the working copy's name to `Fledgling-*`.

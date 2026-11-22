@@ -2,7 +2,7 @@
 
 ![Fledgling PCB layout in KiCad](docs/images/pcb-layout-kicad.png)
 
-> **Status: work in progress (WIP).** The schematic is drawn and the board is partly laid out, but the design is **unfinished, unrouted in places, not DRC-clean, not fabricated and not tested.** Nothing here has flown. I'm publishing it as it stands.
+> **Status: work in progress (WIP).** The schematic is drawn and the board is fully routed and passes KiCad's design-rule check (0 errors, 0 unconnected items), but the design is **not reviewed electrically, not fabricated and not tested.** Nothing here has flown. I'm publishing it as it stands.
 
 Fledgling is a small single-MCU flight computer for my model and high-power rockets. It's meant to be a simpler sibling of my CORVID flight computer: the same RP2350 family, IMU and power parts, so firmware and drivers carry over. It is designed to work with the [Aviary](https://github.com/Birdbrain-Aviation/aviary) software suite (Owl ground station, Heron log analysis, Mockingbird hardware-in-the-loop testing).
 
@@ -58,12 +58,13 @@ Symbols and footprints are embedded in the schematic and board files, so the des
 
 ## Known state (WIP)
 
-- **2026-11-22: routing cleared for re-placement.** All traces and vias were removed so parts around the RP2350 can be moved and the board re-routed; the previous fully routed version (22 errors / 13 warnings, 22 unconnected power connections) is kept in `hardware/archive/Fledgling_routed_2026-11-21.kicad_pcb`. The DRC notes below describe that archived version.
-- Last DRC run (2026-11-21, `docs/DRC-2026-11-21-j12.rpt`, with zones refilled): **22 errors and 13 warnings**. All 22 errors are unconnected power connections: the RP2350's +3V3 supply pins and its B.Cu decoupling caps have no via to the In2.Cu +3V3 plane, plus two GND and three VBUS pads and some small GND pour islands. Signal traces on both outer layers block every via spot, so the RP2350 power fan-out needs re-routing by hand. The warnings are footprint-library mismatches and one track overshoot. Silkscreen is clean. Gerbers in `fab/` are exported but marked NOT FOR FAB until the power connections are done.
+- **2026-11-22: board fully routed, DRC clean.** KiCad 10.0.6 DRC with zones refilled (`docs/DRC-2026-11-22-final.rpt`): **0 errors, 0 unconnected items, 12 warnings.** All 12 warnings are footprint-library mismatches or footprints missing from the `Fledgling` library; they predate the routing. The only part that moved is L1 (0.05 mm in y). The routing was produced with scripts (a grid router and a local checker, not in this repo) and then checked in KiCad, so **nobody has reviewed it electrically**: buck-converter loops, USB pair, QSPI, the ADC dividers and the pyro sense tap still need a human look. Details are in `docs/design-decisions.md` section 11.
+- Gerbers and drills for this version are in `fab/Fledgling-gerbers-2026-11-22.zip`. They are DRC-clean but **not yet checked by a fab's CAM or ordered.** Get a quote and a CAM check before ordering.
+- The previous version (22 errors / 22 unconnected power connections) is kept in `hardware/archive/Fledgling_routed_2026-11-21.kicad_pcb`.
 - Changes on 2026-11-17: E220 supply (J2 pin 6) moved from +5V to +3V3, with the +5V trunk re-routed under J2 on B.Cu; C35/C36 feed-forward capacitor values set. See `docs/design-decisions.md`.
 - Connector orientation (USB-C and XT30) checked. See `docs/layout-log-2026-11-14.md` and `docs/design-decisions.md` for the full history.
 - The BOM is a draft. Some prices are optimistic LCSC "from" prices, some parts are marked pending (pyro fuse rating, load cell capacity), and a few parts have low stock. See the Status and Notes columns in `bom/Fledgling_BOM.csv`.
-- Layout is incomplete and messy.
+- Routing is complete but machine-generated and untidy in places (many small jogs near the RP2350).
 - The design has changed since my first sketches (it started as a 30 x 80 mm 2-layer board), so the early notes don't all match the current board.
 
 ## License
